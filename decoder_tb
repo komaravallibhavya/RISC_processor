@@ -1,0 +1,44 @@
+//timescale 
+`timescale 1ns/1ps 
+//module definition 
+module decoder_unittests (); 
+//variable declerations 
+reg I_clk; 
+reg I_en; 
+reg [15:0]I_inst; 
+//wires 
+wire[4:0]o_aluop; 
+wire[2:0]o_selA; 
+wire[2:0]o_selB; 
+wire[2:0]o_selD; 
+wire[15:0]o_imm; 
+wire o_regwe; 
+inst_dec inst_unit( 
+//inputs 
+I_inst, 
+I_clk, 
+I_en, 
+//outputs 
+o_aluop, 
+o_selA, 
+o_selB, 
+o_selD, 
+o_imm, 
+o_regwe 
+); 
+initial begin 
+//time=0 
+I_clk=0;I_en=0; 
+I_inst=0; 
+ //time=10 
+#10; 
+I_inst=16'b0001011100000100; 
+//time=20 
+#10; 
+I_en=1; 
+end 
+always begin 
+#5; 
+I_clk=~I_clk; 
+end 
+endmodule
